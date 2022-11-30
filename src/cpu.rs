@@ -1,19 +1,33 @@
-struct Registers{
-    A: i8,
-    B: i8,
-    C: i8,
-    D: i8,
-    E: i8,
-    H: i8,
-    L: i8,
-
+// pub use crate::registers::Registers;
+pub mod registers;
+pub struct CPU {
+    pub status: u8,
+    pub program_counter: u16,
 }
 
-struct CPU{
+impl CPU {
+    pub fn new() -> Self {
+        CPU {
+            status: 0,
+            program_counter: 0,
+        }
+    }
 
+    pub fn interpret(&mut self, program: Vec<u8>) {
+        self.program_counter = 0;
+        loop {
+            let opscode = program[self.program_counter as usize];
+            self.program_counter += 1;
+
+            match opscode{
+                // 0x
+                _ => todo!()
+            }
+        }
+    }
 }
 
-enum Flags{
+enum Flags {
     Z = (1 << 7),
     N = (1 << 6),
     H = (1 << 5),
