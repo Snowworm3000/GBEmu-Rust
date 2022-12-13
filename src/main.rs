@@ -1,5 +1,4 @@
-pub mod cpu;
 
 fn main() {
-    println!("Hello, world!");
+    gbsystem::run()
 }

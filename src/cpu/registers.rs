@@ -1,16 +1,19 @@
 
 pub struct Registers {
-    a: u8,
-    b: u8,
-    c: u8,
-    d: u8,
-    e: u8,
-    f: u8,
-    h: u8,
-    l: u8,
+    pub a: u8,
+    pub b: u8,
+    pub c: u8,
+    pub d: u8,
+    pub e: u8,
+    pub f: u8,
+    pub h: u8,
+    pub l: u8,
 }
 
 impl Registers{
+    pub fn new_empty() -> Registers{
+        Registers {a: 0, b: 0, c: 0, d: 0, e: 0, f: 0, h:0, l:0}
+    }
     pub fn get_af(&self) -> u16{
         (self.a as u16) << 8 | self.f as u16
     }
@@ -41,4 +44,19 @@ impl Registers{
     }
 
     
+}
+
+
+mod POSITION {
+    pub const Z: u8 = 7;
+    pub const N: u8 = 6;
+    pub const H: u8 = 5;
+    pub const C: u8 = 4;
+}
+
+enum Flags { // Flags correspond to the last nibble in the f register.
+    Z = (1 << POSITION::Z), // Zero
+    N = (1 << POSITION::N), // Subtract
+    H = (1 << POSITION::H), // Half carry
+    C = (1 << POSITION::C), // Carry
 }
